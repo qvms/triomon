@@ -1,0 +1,22 @@
+#pragma once
+
+#include "AbstractPacketHandler.hpp"
+#include "../PacketParser/Packets/SyslogPacket.hpp"
+#include "../PacketParser/Packets/UdpPacket.hpp"
+#include "../PacketHandler.hpp"
+
+namespace PacketHandlerFramework {
+namespace PacketHandlers {
+
+class SyslogPacketHandler : public AbstractPacketHandler {
+public:
+    explicit SyslogPacketHandler(PacketHandler* mainPacketHandler);
+
+    QList<int> ParsedTypes() const override;
+
+    void ExtractData(NetworkHost* sourceHost, NetworkHost* destinationHost, const QList<std::shared_ptr<PacketParser::Packets::AbstractPacket>>& packetList) override;
+    void Reset() override;
+};
+
+} // namespace PacketHandlers
+} // namespace PacketHandlerFramework
